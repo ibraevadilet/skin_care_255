@@ -24,4 +24,4 @@ class Nv5Screen extends StatelessWidget {
       ),
     );
   }
-
+}
