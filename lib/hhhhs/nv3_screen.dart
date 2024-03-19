@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:skin_care_255/hhhhs/note_add_screen.dart';
@@ -17,7 +18,7 @@ class _Nv3ScreenState extends State<Nv3Screen> {
 
   @override
   void initState() {
-    photos = List.from(photoHive.values.toList());
+    photos = List.from(photoHive.values.toList().reversed);
     super.initState();
   }
 
@@ -44,7 +45,7 @@ class _Nv3ScreenState extends State<Nv3Screen> {
                     builder: (context) => const NoteAddScreen(),
                   ),
                 );
-                photos = List.from(photoHive.values.toList());
+                photos = List.from(photoHive.values.toList().reversed);
                 setState(() {});
               },
               child: Image.asset(
@@ -104,26 +105,46 @@ class PhotoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 140.h,
-          width: 155.w,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.red,
-          ),
-          child: Column(
-            children: [
-              Text(model.date),
-              Text(model.title),
-            ],
+    late Uint8List outputAsUint8List =
+        Uint8List.fromList(model.image.codeUnits);
+
+    return Container(
+      alignment: AlignmentDirectional.bottomCenter,
+      height: 140.h,
+      width: 155.w,
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: MemoryImage(outputAsUint8List), fit: BoxFit.cover),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Container(
+        height: 40.h,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.6),
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(12),
+            bottomRight: Radius.circular(12),
           ),
         ),
-        // Container(
-
-        // ),
-      ],
+        child: Row(
+          children: [
+            SizedBox(width: 12.w),
+            const Icon(
+              Icons.calendar_month_outlined,
+              color: Color(0xff009DFF),
+            ),
+            SizedBox(width: 8.w),
+            Text(
+              model.date,
+              style: TextStyle(
+                fontSize: 14.h,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
