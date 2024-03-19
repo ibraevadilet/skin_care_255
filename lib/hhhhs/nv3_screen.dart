@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -109,20 +111,45 @@ class PhotoWidget extends StatelessWidget {
         Container(
           height: 140.h,
           width: 155.w,
+          clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             color: Colors.red,
           ),
-          child: Column(
-            children: [
-              Text(model.date),
-              Text(model.title),
-            ],
+          child: Image.memory(
+            Uint8List.fromList(model.image.codeUnits),
+            fit: BoxFit.cover,
           ),
         ),
-        // Container(
-
-        // ),
+        Positioned(
+          bottom: 0,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.6),
+            ),
+            width: 155.w,
+            height: 40,
+            child: Row(
+              children: [
+                SizedBox(width: 12.w),
+                Image.asset(
+                  'assets/images/calendar.png',
+                  height: 16.h,
+                ),
+                SizedBox(width: 8.w),
+                Text(
+                  model.date,
+                  style: TextStyle(
+                    fontFamily: family,
+                    fontSize: 14.h,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }

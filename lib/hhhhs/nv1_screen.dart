@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skin_care_255/hhhhs/test_screen.dart';
 import 'package:skin_care_255/main.dart';
 
 class Nv1Screen extends StatelessWidget {
@@ -17,10 +19,39 @@ class Nv1Screen extends StatelessWidget {
           color: Colors.black,
         ),
       ),
-      body: Column(
-        children: [
-          Container(),
-        ],
+      body: Center(
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Stack(
+                children: [
+                  Image.asset(
+                    'assets/images/TestReclama.png',
+                  ),
+                  Positioned(
+                    right: 34.w,
+                    left: 33.w,
+                    bottom: 32.h,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          CupertinoPageRoute(
+                            builder: (context) => const TestScreen(),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        'assets/images/startIcon.png',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -205,7 +205,7 @@ class _NoteAddScreenState extends State<NoteAddScreen> {
                             _image!,
                             width: MediaQuery.of(context).size.width,
                             height: 240.h,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                           ),
                         )
                       : Column(
