@@ -113,6 +113,12 @@ class PhotoWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             color: Colors.red,
           ),
+          child: Column(
+            children: [
+              Text(model.date),
+              Text(model.title),
+            ],
+          ),
         ),
         // Container(
 
