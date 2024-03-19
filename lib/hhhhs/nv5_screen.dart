@@ -1,9 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skin_care_255/hhhhs/premdfasf.dart';
 import 'package:skin_care_255/main.dart';
 
-class Nv5Screen extends StatelessWidget {
+class Nv5Screen extends StatefulWidget {
   const Nv5Screen({super.key});
+
+  @override
+  State<Nv5Screen> createState() => _Nv5ScreenState();
+}
+
+class _Nv5ScreenState extends State<Nv5Screen> {
+  bool isPrem = false;
+  @override
+  void initState() {
+    isPrem = localData.getBool('prem') ?? false;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,6 +140,38 @@ class Nv5Screen extends StatelessWidget {
               height: 26.h,
               color: Colors.black.withOpacity(0.4),
             ),
+            SizedBox(height: 24.h),
+            if (!isPrem)
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Premdfasf(
+                        isClose: true,
+                      ),
+                    ),
+                  );
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xff009DFF),
+                  ),
+                  child: const Text(
+                    'Buy Premium for \$0,99',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      fontFamily: 'Inter',
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),

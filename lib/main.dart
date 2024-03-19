@@ -5,13 +5,17 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/hhhhs/pagev_screen.dart';
+import 'package:skin_care_255/models/photo_hive_model/photo_hive_model.dart';
 
 late final SharedPreferences localData;
 const String family = 'SF-Pro';
+late final Box<PhotoHiveModel> photoHive;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
+  Hive.registerAdapter(PhotoHiveModelAdapter());
+  photoHive = await Hive.openBox<PhotoHiveModel>('photoHive');
   localData = await SharedPreferences.getInstance();
   final isOpend = localData.getBool('iff') ?? false;
 

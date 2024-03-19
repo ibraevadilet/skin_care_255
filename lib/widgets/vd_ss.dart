@@ -4,17 +4,21 @@ class VdSs {
   final String care;
   final String title;
   final String data;
+  final bool isPrem;
 
-  VdSs(
-      {required this.vdUrl,
-      required this.image,
-      required this.care,
-      required this.title,
-      required this.data});
+  VdSs({
+    required this.vdUrl,
+    required this.image,
+    required this.care,
+    required this.title,
+    required this.data,
+    this.isPrem = true,
+  });
 }
 
 List<VdSs> listVd = [
   VdSs(
+    isPrem: false,
     vdUrl: 'https://youtu.be/y7UyKEb2ZHw?si=Hz_o0VCHot_myA_K',
     image: 'https://i.ibb.co/FDdD351/vd1.png',
     care: 'Skin Care',
@@ -23,6 +27,7 @@ List<VdSs> listVd = [
     data: '07.12.2023',
   ),
   VdSs(
+    isPrem: false,
     vdUrl: 'https://youtu.be/hevaszImfJk?si=WtAlMZORUxh55d8b',
     image: 'https://i.ibb.co/5RyBfJj/vd2.png',
     care: 'Skin Care',
@@ -30,6 +35,7 @@ List<VdSs> listVd = [
     data: '28.02.2023',
   ),
   VdSs(
+    isPrem: false,
     vdUrl: 'https://youtu.be/WPiE0Ijxn7k?si=1gupUcgrwmjhNGyi',
     image: 'https://i.ibb.co/my13TGF/vd3.png',
     care: 'Skin Care',
@@ -37,6 +43,7 @@ List<VdSs> listVd = [
     data: '06.02.2023',
   ),
   VdSs(
+    isPrem: false,
     vdUrl: 'https://youtu.be/GNOl8XNbKns?si=6qbHHVsG5BkdAcBX',
     image: 'https://i.ibb.co/nn0HTXZ/vd4.png',
     care: 'Skin Care',
@@ -44,6 +51,7 @@ List<VdSs> listVd = [
     data: '18.02.2024',
   ),
   VdSs(
+    isPrem: false,
     vdUrl: 'https://youtu.be/3zKTo-nJgUI?si=PmV6hdBcolVpcRdN',
     image: 'https://i.ibb.co/qW6DdR7/vd5.png',
     care: 'Products',
