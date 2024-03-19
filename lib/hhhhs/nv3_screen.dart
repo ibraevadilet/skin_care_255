@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:skin_care_255/hhhhs/note_add_screen.dart';
@@ -19,7 +20,7 @@ class _Nv3ScreenState extends State<Nv3Screen> {
 
   @override
   void initState() {
-    photos = List.from(photoHive.values.toList());
+    photos = List.from(photoHive.values.toList().reversed);
     super.initState();
   }
 
@@ -46,7 +47,7 @@ class _Nv3ScreenState extends State<Nv3Screen> {
                     builder: (context) => const NoteAddScreen(),
                   ),
                 );
-                photos = List.from(photoHive.values.toList());
+                photos = List.from(photoHive.values.toList().reversed);
                 setState(() {});
               },
               child: Image.asset(
