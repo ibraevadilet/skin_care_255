@@ -5,17 +5,24 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/hhhhs/pagev_screen.dart';
+import 'package:skin_care_255/hhhhs/services/notification_handler.dart';
+import 'package:skin_care_255/models/notification_model/notification_hive_model.dart';
 import 'package:skin_care_255/models/photo_hive_model/photo_hive_model.dart';
 
 late final SharedPreferences localData;
 const String family = 'SF-Pro';
 late final Box<PhotoHiveModel> photoHive;
+late final Box<NotificationHiveModel> notificatonHive;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  await NotificationService().init(); //
+  await NotificationService().requestIOSPermissions(); //
   await Hive.initFlutter();
   Hive.registerAdapter(PhotoHiveModelAdapter());
+  Hive.registerAdapter(NotificationHiveModelAdapter());
   photoHive = await Hive.openBox<PhotoHiveModel>('photoHive');
+  notificatonHive = await Hive.openBox<NotificationHiveModel>('notifHive');
   localData = await SharedPreferences.getInstance();
   final isOpend = localData.getBool('iff') ?? false;
 
