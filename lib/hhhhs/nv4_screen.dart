@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:skin_care_255/hhhhs/services/notification_handler.dart';
+import 'package:skin_care_255/widgets/notification_handler.dart';
 import 'package:skin_care_255/main.dart';
 import 'package:skin_care_255/models/notification_model/notification_hive_model.dart';
 

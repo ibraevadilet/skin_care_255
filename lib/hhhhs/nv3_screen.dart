@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -115,7 +113,6 @@ class PhotoWidget extends StatelessWidget {
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Colors.red,
           ),
           child: Image.memory(
             Uint8List.fromList(model.image.codeUnits),
