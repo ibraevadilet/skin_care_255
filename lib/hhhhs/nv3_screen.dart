@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:skin_care_255/hhhhs/note_add_screen.dart';
+import 'package:skin_care_255/hhhhs/note_detail_screen.dart';
 import 'package:skin_care_255/main.dart';
 import 'package:skin_care_255/models/photo_hive_model/photo_hive_model.dart';
 
@@ -105,50 +107,62 @@ class PhotoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          height: 140.h,
-          width: 155.w,
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Image.memory(
-            Uint8List.fromList(model.image.codeUnits),
-            fit: BoxFit.cover,
-          ),
-        ),
-        Positioned(
-          bottom: 0,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.6),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          CupertinoPageRoute(
+            builder: (context) => NoteDetailScreen(
+              model: model,
             ),
+          ),
+        );
+      },
+      child: Stack(
+        children: [
+          Container(
+            height: 140.h,
             width: 155.w,
-            height: 40,
-            child: Row(
-              children: [
-                SizedBox(width: 12.w),
-                Image.asset(
-                  'assets/images/calendar.png',
-                  height: 16.h,
-                ),
-                SizedBox(width: 8.w),
-                Text(
-                  model.date,
-                  style: TextStyle(
-                    fontFamily: family,
-                    fontSize: 14.h,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Image.memory(
+              Uint8List.fromList(model.image.codeUnits),
+              fit: BoxFit.cover,
             ),
           ),
-        ),
-      ],
+          Positioned(
+            bottom: 0,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.6),
+              ),
+              width: 155.w,
+              height: 40,
+              child: Row(
+                children: [
+                  SizedBox(width: 12.w),
+                  Image.asset(
+                    'assets/images/calendar.png',
+                    height: 16.h,
+                  ),
+                  SizedBox(width: 8.w),
+                  Text(
+                    model.date,
+                    style: TextStyle(
+                      fontFamily: family,
+                      fontSize: 14.h,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
