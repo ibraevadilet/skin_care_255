@@ -1,7 +1,11 @@
+import 'package:apphud/apphud.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/hhhhs/premdfasf.dart';
 import 'package:skin_care_255/main.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Nv5Screen extends StatefulWidget {
   const Nv5Screen({super.key});
@@ -37,7 +41,10 @@ class _Nv5ScreenState extends State<Nv5Screen> {
           children: [
             SizedBox(height: 16.h),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                launchUrl(Uri.parse(
+                    'https://doc-hosting.flycricket.io/pureaura-skincare-hub-privacy-policy/a2155d62-31bd-4cc9-ad3d-8ff7a90d8eed/privacy'));
+              },
               child: Container(
                 color: Colors.transparent,
                 child: Row(
@@ -63,7 +70,10 @@ class _Nv5ScreenState extends State<Nv5Screen> {
               color: Colors.black.withOpacity(0.4),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                launchUrl(Uri.parse(
+                    'https://doc-hosting.flycricket.io/pureaura-skincare-hub-terms-of-use/6ffa2aab-20bb-45f2-84e8-3d99bddd2819/terms'));
+              },
               child: Container(
                 color: Colors.transparent,
                 child: Row(
@@ -89,7 +99,10 @@ class _Nv5ScreenState extends State<Nv5Screen> {
               color: Colors.black.withOpacity(0.4),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                launchUrl(Uri.parse(
+                    'https://sites.google.com/view/pureaura/support-form'));
+              },
               child: Container(
                 color: Colors.transparent,
                 child: Row(
@@ -115,7 +128,53 @@ class _Nv5ScreenState extends State<Nv5Screen> {
               color: Colors.black.withOpacity(0.4),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () async {
+                final hasPremiumAccess = await Apphud.hasPremiumAccess();
+                final hasActiveSubscription =
+                    await Apphud.hasActiveSubscription();
+                if (hasPremiumAccess || hasActiveSubscription) {
+                  await localData.setBool('prem', true);
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => CupertinoAlertDialog(
+                      title: const Text('Success!'),
+                      content: const Text('Your purchase has been restored!'),
+                      actions: [
+                        CupertinoDialogAction(
+                          isDefaultAction: true,
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const NavbarScreen(),
+                              ),
+                              (route) => false,
+                            );
+                          },
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) => CupertinoAlertDialog(
+                      title: const Text('Restore purchase'),
+                      content: const Text(
+                          'Your purchase is not found. Write to support: https://sites.google.com/view/pureaura/support-form'),
+                      actions: [
+                        CupertinoDialogAction(
+                          isDefaultAction: true,
+                          onPressed: () => {Navigator.of(context).pop()},
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
               child: Container(
                 color: Colors.transparent,
                 child: Row(

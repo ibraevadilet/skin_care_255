@@ -1,5 +1,9 @@
+import 'package:apphud/apphud.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:skin_care_255/hhhhs/navbar_screen.dart';
+import 'package:skin_care_255/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Esafaf extends StatelessWidget {
@@ -16,7 +20,8 @@ class Esafaf extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            launchUrl(Uri.parse('https://google.com'));
+            launchUrl(Uri.parse(
+                'https://doc-hosting.flycricket.io/pureaura-skincare-hub-terms-of-use/6ffa2aab-20bb-45f2-84e8-3d99bddd2819/terms'));
           },
           child: Text(
             'Term of Service',
@@ -39,7 +44,50 @@ class Esafaf extends StatelessWidget {
         const Spacer(),
         InkWell(
           onTap: () async {
-            // await PremiumFitnessZone.buyFitnessZone(context);
+            final hasPremiumAccess = await Apphud.hasPremiumAccess();
+            final hasActiveSubscription = await Apphud.hasActiveSubscription();
+            if (hasPremiumAccess || hasActiveSubscription) {
+              await localData.setBool('prem', true);
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => CupertinoAlertDialog(
+                  title: const Text('Success!'),
+                  content: const Text('Your purchase has been restored!'),
+                  actions: [
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const NavbarScreen(),
+                          ),
+                          (route) => false,
+                        );
+                      },
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => CupertinoAlertDialog(
+                  title: const Text('Restore purchase'),
+                  content: const Text(
+                      'Your purchase is not found. Write to support: https://sites.google.com/view/pureaura/support-form'),
+                  actions: [
+                    CupertinoDialogAction(
+                      isDefaultAction: true,
+                      onPressed: () => {Navigator.of(context).pop()},
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                ),
+              );
+            }
           },
           child: Text(
             'Restore',
@@ -62,7 +110,8 @@ class Esafaf extends StatelessWidget {
         const Spacer(),
         InkWell(
           onTap: () {
-            launchUrl(Uri.parse('https://google.com'));
+            launchUrl(Uri.parse(
+                'https://doc-hosting.flycricket.io/pureaura-skincare-hub-privacy-policy/a2155d62-31bd-4cc9-ad3d-8ff7a90d8eed/privacy'));
           },
           child: Text(
             'Privacy Policy',

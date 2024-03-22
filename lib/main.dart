@@ -1,3 +1,4 @@
+import 'package:apphud/apphud.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,9 +6,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/hhhhs/pagev_screen.dart';
-import 'package:skin_care_255/widgets/notification_handler.dart';
 import 'package:skin_care_255/models/notification_model/notification_hive_model.dart';
 import 'package:skin_care_255/models/photo_hive_model/photo_hive_model.dart';
+import 'package:skin_care_255/widgets/notification_handler.dart';
 
 late final SharedPreferences localData;
 const String family = 'SF-Pro';
@@ -25,6 +26,7 @@ void main() async {
   notificatonHive = await Hive.openBox<NotificationHiveModel>('notifHive');
   localData = await SharedPreferences.getInstance();
   final isOpend = localData.getBool('iff') ?? false;
+  await Apphud.start(apiKey: 'app_AgVUNgarCCRLNSG1HnHjB6TDcrux2Z');
 
   await localData.setBool('iff', true);
   if (isOpend) {

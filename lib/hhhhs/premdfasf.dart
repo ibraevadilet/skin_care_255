@@ -1,12 +1,21 @@
+import 'package:apphud/apphud.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/main.dart';
 import 'package:skin_care_255/widgets/adfs_widgets.dart';
 
-class Premdfasf extends StatelessWidget {
+class Premdfasf extends StatefulWidget {
   const Premdfasf({super.key, this.isClose = false});
   final bool isClose;
+
+  @override
+  State<Premdfasf> createState() => _PremdfasfState();
+}
+
+class _PremdfasfState extends State<Premdfasf> {
+  bool sfasfas = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,7 +45,7 @@ class Premdfasf extends StatelessWidget {
             child: SafeArea(
               child: InkWell(
                 onTap: () {
-                  if (isClose) {
+                  if (widget.isClose) {
                     Navigator.pop(context);
                   } else {
                     Navigator.pushAndRemoveUntil(
@@ -85,14 +94,82 @@ class Premdfasf extends StatelessWidget {
                   SizedBox(height: 24.h),
                   InkWell(
                     onTap: () async {
-                      await localData.setBool('prem', true);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const NavbarScreen(),
-                        ),
-                        (protected) => false,
+                      setState(() {
+                        sfasfas = true;
+                      });
+
+                      final apphudPaywalls = await Apphud.paywalls();
+                      print(apphudPaywalls);
+                      await Apphud.purchase(
+                        product: apphudPaywalls?.paywalls.first.products?.first,
+                      ).whenComplete(
+                        () async {
+                          if (await Apphud.hasPremiumAccess() ||
+                              await Apphud.hasActiveSubscription()) {
+                            final hasPremiumAccess =
+                                await Apphud.hasPremiumAccess();
+                            final hasActiveSubscription =
+                                await Apphud.hasActiveSubscription();
+                            if (hasPremiumAccess || hasActiveSubscription) {
+                              await localData.setBool('prem', true);
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    CupertinoAlertDialog(
+                                  title: const Text('Success!'),
+                                  content: const Text(
+                                      'Your purchase has been restored!'),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                      isDefaultAction: true,
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) =>
+                                                const NavbarScreen(),
+                                          ),
+                                          (route) => false,
+                                        );
+                                      },
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    CupertinoAlertDialog(
+                                  title: const Text('Restore purchase'),
+                                  content: const Text(
+                                      'Your purchase is not found. Write to support: https://sites.google.com/view/pureaura/support-form'),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                      isDefaultAction: true,
+                                      onPressed: () =>
+                                          {Navigator.of(context).pop()},
+                                      child: const Text('Ok'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const NavbarScreen(),
+                              ),
+                              (route) => false,
+                            );
+                          }
+                        },
                       );
+                      setState(() {
+                        sfasfas = false;
+                      });
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -102,15 +179,17 @@ class Premdfasf extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         color: const Color(0xff009DFF),
                       ),
-                      child: const Text(
-                        'Buy Premium for \$0,99',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: 'Inter',
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: sfasfas
+                          ? const CircularProgressIndicator.adaptive()
+                          : const Text(
+                              'Buy Premium for \$0,99',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: 'Inter',
+                                color: Colors.white,
+                              ),
+                            ),
                     ),
                   ),
                   SizedBox(height: 24.h),
