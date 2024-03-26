@@ -127,10 +127,12 @@ class PhotoWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Image.memory(
-              Uint8List.fromList(model.image.codeUnits),
-              fit: BoxFit.cover,
-            ),
+            child: model.image != null
+                ? Image.memory(
+                    Uint8List.fromList(model.image!.codeUnits),
+                    fit: BoxFit.cover,
+                  )
+                : Image.asset('assets/images/emtyIcon.png'),
           ),
           Positioned(
             bottom: 0,

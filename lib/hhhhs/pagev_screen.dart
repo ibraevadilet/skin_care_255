@@ -14,6 +14,36 @@ class PagevScreen extends StatefulWidget {
 class _PagevScreenState extends State<PagevScreen> {
   int currantPage = 0;
   final controller = PageController();
+
+  late Image oneImage;
+  late Image twoImage;
+  late Image threeImage;
+
+  @override
+  void initState() {
+    super.initState();
+    oneImage = Image.asset(
+      'assets/images/pg1.png',
+      fit: BoxFit.cover,
+    );
+    twoImage = Image.asset(
+      'assets/images/pg2.png',
+      fit: BoxFit.cover,
+    );
+    threeImage = Image.asset(
+      'assets/images/pg3.png',
+      fit: BoxFit.cover,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(oneImage.image, context);
+    precacheImage(twoImage.image, context);
+    precacheImage(threeImage.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,20 +55,20 @@ class _PagevScreenState extends State<PagevScreen> {
               currantPage = value;
             },
             controller: controller,
-            children: const [
+            children: [
               PGWIDGET(
-                image: 'assets/images/pg1.png',
+                image: oneImage,
                 title: 'Skin type testing',
                 descr:
                     'Take a test to determine your skin type and get recommendations',
               ),
               PGWIDGET(
-                image: 'assets/images/pg2.png',
+                image: twoImage,
                 title: 'Video tutorials',
                 descr: 'Watch video tutorials on proper skin care methods',
               ),
               PGWIDGET(
-                image: 'assets/images/pg3.png',
+                image: threeImage,
                 title: 'Photo diary',
                 descr:
                     'Input and record your progress during your skin care routine',
@@ -111,7 +141,7 @@ class PGWIDGET extends StatelessWidget {
     required this.title,
     required this.descr,
   });
-  final String image;
+  final Widget image;
   final String title;
   final String descr;
 
@@ -122,10 +152,7 @@ class PGWIDGET extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          child: Image.asset(
-            image,
-            fit: BoxFit.cover,
-          ),
+          child: image,
         ),
         Positioned(
           left: 24,

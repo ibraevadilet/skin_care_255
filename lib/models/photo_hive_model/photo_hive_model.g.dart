@@ -19,7 +19,7 @@ class PhotoHiveModelAdapter extends TypeAdapter<PhotoHiveModel> {
     return PhotoHiveModel(
       date: fields[0] as String,
       title: fields[1] as String,
-      image: fields[2] as String,
+      image: fields[2] as String?,
     );
   }
 

@@ -110,6 +110,31 @@ class _TestScreenState extends State<TestScreen> {
                               (protected) => false,
                             );
                           }
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              duration: const Duration(seconds: 2),
+                              elevation: 0,
+                              backgroundColor: Colors.transparent,
+                              content: Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFFF1100),
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                child: Text(
+                                  'Please select a test answer',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: family,
+                                    fontSize: 16.h,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
                         }
                       },
                       child: Container(

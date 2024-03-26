@@ -16,6 +16,24 @@ class Premdfasf extends StatefulWidget {
 
 class _PremdfasfState extends State<Premdfasf> {
   bool sfasfas = false;
+
+  late Image premIMage;
+
+  @override
+  void initState() {
+    super.initState();
+    premIMage = Image.asset(
+      'assets/images/pr1.png',
+      fit: BoxFit.cover,
+    );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    precacheImage(premIMage.image, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,10 +46,9 @@ class _PremdfasfState extends State<Premdfasf> {
                 width: MediaQuery.of(context).size.width,
               ),
               Expanded(
-                child: Image.asset(
-                  'assets/images/pr1.png',
-                  fit: BoxFit.cover,
+                child: SizedBox(
                   width: MediaQuery.of(context).size.width,
+                  child: premIMage,
                 ),
               ),
               const Expanded(

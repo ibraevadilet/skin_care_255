@@ -169,24 +169,6 @@ class _VdWidgetState extends State<VdWidget> {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 10.h),
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.calendar_month_outlined,
-                        color: Color(0xff009DFF),
-                      ),
-                      SizedBox(width: 8.w),
-                      Text(
-                        widget.model.data,
-                        style: TextStyle(
-                          fontSize: 12.h,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black.withOpacity(0.6),
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(height: 16.h),
                 ],
               ),

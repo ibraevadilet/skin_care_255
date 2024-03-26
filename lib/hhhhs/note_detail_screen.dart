@@ -111,39 +111,41 @@ class NoteDetailScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 16.h),
-              Text(
-                'Photo',
-                style: TextStyle(
-                  fontFamily: family,
-                  fontSize: 16.h,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 4.r),
-                width: MediaQuery.of(context).size.width,
-                height: 240.h,
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 3,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                  borderRadius: BorderRadius.circular(12.r),
-                  color: Colors.white,
-                ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(12.r),
-                  child: Image.memory(
-                    Uint8List.fromList(model.image.codeUnits),
-                    fit: BoxFit.cover,
+              if (model.image != null)
+                Text(
+                  'Photo',
+                  style: TextStyle(
+                    fontFamily: family,
+                    fontSize: 16.h,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black,
                   ),
                 ),
-              ),
+              if (model.image != null)
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 4.r),
+                  width: MediaQuery.of(context).size.width,
+                  height: 240.h,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 3,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(12.r),
+                    color: Colors.white,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: Image.memory(
+                      Uint8List.fromList(model.image!.codeUnits),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
             ],
           ),
         ),

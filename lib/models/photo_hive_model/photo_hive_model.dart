@@ -9,11 +9,11 @@ class PhotoHiveModel extends HiveObject {
   @HiveField(1)
   String title;
   @HiveField(2)
-  String image;
+  String? image;
 
   PhotoHiveModel({
     required this.date,
     required this.title,
-    required this.image,
+    this.image,
   });
 }

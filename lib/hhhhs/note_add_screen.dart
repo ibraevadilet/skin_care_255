@@ -166,6 +166,9 @@ class _NoteAddScreenState extends State<NoteAddScreen> {
                   hintText: 'Enter note',
                   maxLine: 5,
                   borderColor: Colors.white,
+                  onChanged: (p0) {
+                    setState(() {});
+                  },
                 ),
               ),
               SizedBox(height: 16.h),
@@ -234,13 +237,12 @@ class _NoteAddScreenState extends State<NoteAddScreen> {
               InkWell(
                 onTap: () async {
                   if (selectDateString != 'Select Date' &&
-                      _controllerNote.text.isNotEmpty &&
-                      photo != null) {
+                      _controllerNote.text.isNotEmpty) {
                     await photoHive.add(
                       PhotoHiveModel(
                         date: selectDateString,
                         title: _controllerNote.text,
-                        image: photo!,
+                        image: photo,
                       ),
                     );
                     Navigator.pop(context);
@@ -250,7 +252,10 @@ class _NoteAddScreenState extends State<NoteAddScreen> {
                   height: 52.h,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: const Color(0xff009DFF),
+                    color: selectDateString != 'Select Date' &&
+                            _controllerNote.text.isNotEmpty
+                        ? const Color(0xff009DFF)
+                        : Colors.grey,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Center(
