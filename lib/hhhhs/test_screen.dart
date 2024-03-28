@@ -271,7 +271,7 @@ class _TestScreenState extends State<TestScreen> {
                                       )
                                     : Image.asset(
                                         'assets/images/selectedTest.png',
-                                        height: 16.h,
+                                        height: 16,
                                       ),
                                 const SizedBox(width: 8),
                                 Flexible(
