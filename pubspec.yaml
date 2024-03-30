@@ -33,6 +33,8 @@ dependencies:
   flutter_native_timezone: ^2.0.0
   flutter_local_notifications: ^9.8.0+1
   overlay_support: ^2.1.0
+  webview_flutter: ^4.4.2
+  dio: ^5.4.0
   
 
 flutter_native_splash:

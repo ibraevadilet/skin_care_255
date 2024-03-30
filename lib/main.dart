@@ -6,6 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:skin_care_255/hhhhs/navbar_screen.dart';
 import 'package:skin_care_255/hhhhs/pagev_screen.dart';
+import 'package:skin_care_255/sdgsdgdsg/sdgdsgdsg/sdfgdsgdsg/prem_hive_model.dart';
+import 'package:skin_care_255/sdgsdgdsg/sdfdsfsdf.dart';
 import 'package:skin_care_255/models/notification_model/notification_hive_model.dart';
 import 'package:skin_care_255/models/photo_hive_model/photo_hive_model.dart';
 import 'package:skin_care_255/widgets/notification_handler.dart';
@@ -25,9 +27,13 @@ void main() async {
   photoHive = await Hive.openBox<PhotoHiveModel>('photoHive');
   notificatonHive = await Hive.openBox<NotificationHiveModel>('notifHive');
   localData = await SharedPreferences.getInstance();
-  final isOpend = localData.getBool('iff') ?? false;
   await Apphud.start(apiKey: 'app_AgVUNgarCCRLNSG1HnHjB6TDcrux2Z');
+  Hive.registerAdapter(NewPosterModelAdapter());
+  await sdfdsfsdf();
+}
 
+sfsdfdsfsff() async {
+  final isOpend = localData.getBool('iff') ?? false;
   await localData.setBool('iff', true);
   if (isOpend) {
     runApp(const PrNavigatorApp(childWidget: NavbarScreen()));
