@@ -31,6 +31,7 @@ class Nv2Screen extends StatelessWidget {
         separatorBuilder: (context, index) => const SizedBox(height: 12),
         itemBuilder: (context, index) => VdWidget(
           model: listVd[index],
+          indx: index + 1,
         ),
       ),
     );
@@ -41,8 +42,10 @@ class VdWidget extends StatefulWidget {
   const VdWidget({
     super.key,
     required this.model,
+    required this.indx,
   });
   final VdSs model;
+  final int indx;
 
   @override
   State<VdWidget> createState() => _VdWidgetState();
@@ -71,7 +74,10 @@ class _VdWidgetState extends State<VdWidget> {
           await Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => VdScreen(url: widget.model.vdUrl),
+              builder: (context) => VdScreen(
+                model: widget.model,
+                indx: widget.indx,
+              ),
             ),
           );
           SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
@@ -168,6 +174,25 @@ class _VdWidgetState extends State<VdWidget> {
                       fontWeight: FontWeight.w600,
                       color: Colors.black,
                     ),
+                  ),
+                  SizedBox(height: 24.h),
+                  Row(
+                    children: [
+                      const Icon(
+                        Icons.watch_later_outlined,
+                        color: Color(0xff009DFF),
+                        size: 16,
+                      ),
+                      SizedBox(width: 4.w),
+                      Text(
+                        '${widget.model.time} min',
+                        style: TextStyle(
+                          fontSize: 12.h,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.6),
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 16.h),
                 ],
