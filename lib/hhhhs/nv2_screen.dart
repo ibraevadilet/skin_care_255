@@ -16,7 +16,7 @@ class Nv2Screen extends StatelessWidget {
       appBar: AppBar(
         scrolledUnderElevation: 0,
         centerTitle: false,
-        title: const Text('Video tutorials'),
+        title: const Text('Lessons'),
         titleTextStyle: TextStyle(
           fontFamily: family,
           fontSize: 28.h,
